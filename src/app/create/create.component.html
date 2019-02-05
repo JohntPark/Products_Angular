@@ -1,0 +1,82 @@
+<div class="container-fluid" id="create-header">
+  <h1 class="createProductTitle"> Create Product </h1>
+
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+  <h5 *ngIf="success"></h5>
+  <label>
+    <h3>Product Name:</h3>
+    <input type="text" formControlName="name">
+    <div *ngIf="submitted && messageForm.controls.name.errors" class="error">
+      <div *ngIf="messageForm.controls.name.errors.required">
+        <p>Product name is required</p>
+      </div>
+    </div>
+  </label>
+
+  <label>
+      <h3>Product Price:</h3>
+      <input type="text" formControlName="price">
+    <div *ngIf="submitted && messageForm.controls.price.errors" class="error">
+      <div *ngIf="messageForm.controls.price.errors.required">Product Price is required</div>
+    </div>
+  </label>
+
+  <label>
+      <h3>Product Quantity:</h3>
+      <input type="text" formControlName="quantity">
+      <div *ngIf="submitted && messageForm.controls.quantity.errors" class="error">
+        <div *ngIf="messageForm.controls.quantity.errors.required">Product Quantity is required</div>
+      </div>
+    </label>
+
+  <button type="submit" class="buttonSubmit" (click)="openModal()">
+    Create Me!
+  </button>
+
+</form>
+</div>
+
+
+<div *ngIf="submitted && success" class="results">
+
+<div class="backdropSubmit" [ngStyle]="{'display': display}">
+<div class="modal" id="modalPlacement"  tab-index="-1" [ngStyle]="{'display':display}" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="thankYouHeader">Thank you for your submission!</h5>
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="messageBody">
+        <strong>Name:</strong> 
+        <span>{{ messageForm.controls.name.value }}</span>
+      
+        <strong>Price:</strong> 
+        <span>${{ messageForm.controls.price.value }}</span>
+      
+        <strong>Quantity:</strong> 
+        <span>{{ messageForm.controls.quantity.value }}</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<!-- <div *ngIf="submitted && success" class="results">
+  <strong> THANK YOU FOR YOUR SUBMISSION! </strong>
+  <strong>Name:</strong> 
+  <span>{{ messageForm.controls.name.value }}</span>
+
+  <strong>Price:</strong> 
+  <span>{{ messageForm.controls.price.value }}</span>
+
+  <strong>Quantity:</strong> 
+  <span>{{ messageForm.controls.quantity.value }}</span>
+</div> -->

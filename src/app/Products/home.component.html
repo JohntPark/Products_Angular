@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <!-- LIST OF PRODUCTS -->
+  <div class="row">
+    <div class="col-md-8 shading" id="listOfProductsSpacing">
+        <h1>List of Products</h1>
+      <div class="pull left productContainer" *ngFor="let product of products">
+      <ul>
+            <li>
+              <div class="buttonContainer">
+                <button type="submit" id="buttonPlacementUpdate" class="btn btn-primary" (click)="openModalUpdate(product.id)">&#8634;</button>
+                <button type="submit" id="buttonPlacementDelete" class="btn btn-danger" (click)="openModalDelete(product.id)">x</button>
+              </div>
+                  <div>
+                    <p class="list-group-item-text">Name: {{product.name}}</p>
+                    <p class="list-group-item-text">Price: ${{product.price}}</p>
+                    <p class="list-group-item-text">Quantity: {{product.quantity}}</p>
+                    <p class="list-group-item-text">ID: {{product.id}}</p>
+                  </div>
+                </li>
+        </ul>
+      </div>
+    </div>
+  
+  <!-- GET ID -->
+    <div class="col-md-4 shading" id="specificProductSpacing">
+      <h1>Look for specific product</h1>
+  
+    <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+        <label>
+            ID(required):
+            <input type="text" formControlName="id" id="findByIdStyle">
+            <div *ngIf="submitted && messageForm.controls.id.errors" class="error">
+              <div *ngIf="messageForm.controls.id.errors.required">ID is required</div>
+            </div>
+          </label>
+        <button type="submit" class = "btn btn-primary">Search ID</button>
+    </form>
+  
+    <div *ngIf="product != null && submitted && success" class="results">
+      <strong>Product has been found.</strong>
+        <div class="productFoundSpacing">
+          <p class="list-group-item-text"><em>ID:  </em>{{ product.id }}</p>
+          <p class="list-group-item-text"><em>Name:  </em>{{ product.name }}</p>
+          <p class="list-group-item-text"><em>Price:  </em>${{ product.price }}</p>
+          <p class="list-group-item-text"><em>Quantity:  </em>{{ product.quantity }}</p>
+        </div>
+    </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <!-- UPDATE MODAL  -->
+  <div class="backdropUpdate" [ngStyle]="{'display': displayUpdate}">
+      <div class="modal"  tab-index="-1" [ngStyle]="{'display':displayUpdate}" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="thankYouHeader">Update Properties</h5>
+              <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+  
+            <form [formGroup]="messageFormUpdate"  id="modalPage" (ngSubmit)="onSubmitUpdate()">
+                <h5 *ngIf="success"></h5>
+              <div>
+                <label>
+                  <h3>Product Name:</h3>
+                  <input type="text" formControlName="name">
+                  <div *ngIf="submitted && messageFormUpdate.controls.name.errors" class="error">
+                    <div *ngIf="messageFormUpdate.controls.name.errors.required">Product name is required</div>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <label>
+                  <h3>Product Price:</h3>
+                  <input type='text' formControlName="price">
+                  <div *ngIf="submitted && messageFormUpdate.controls.price.errors" class="error">
+                    <div *ngIf="messageFormUpdate.controls.price.errors.required">Product Price is required</div>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <label>
+                    <h3>Product Quantity:</h3>
+                    <input type='text' formControlName="quantity">
+                    <div *ngIf="submitted && messageFormUpdate.controls.quantity.errors" class="error">
+                      <div *ngIf="messageFormUpdate.controls.quantity.errors.required">Product Quantity is required</div>
+                    </div>
+                  </label>
+              </div>
+              </form>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary" (click)="onCloseHandledUpdate(id)">Update</button>
+              <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+
+      <!-- DELETE MODAL -->
+
+      <div class="backdropDelete" [ngStyle]="{'display': displayDelete}">
+          <div class="modal"  tab-index="-1" [ngStyle]="{'display':displayDelete}" role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="thankYouHeader">Delete Product</h5>
+                  <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                  <h1> ARE YOU SURE YOU WANT TO DELETE? </h1>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-danger" (click)="onCloseHandledDelete(id)">Delete</button>
+                  <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
