@@ -14,7 +14,7 @@
                     <p class="list-group-item-text">Name: {{product.name}}</p>
                     <p class="list-group-item-text">Price: ${{product.price}}</p>
                     <p class="list-group-item-text">Quantity: {{product.quantity}}</p>
-                    <p class="list-group-item-text">ID: {{product.id}}</p>
+                  <p class="list-group-item-text" id="idFormat">ID: {{product.id}}</p>
                   </div>
                 </li>
         </ul>
@@ -27,16 +27,18 @@
   
     <form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
         <label>
-            ID(required):
+           <strong id="idRequiredText">
+              ID(required):
+           </strong>
             <input type="text" formControlName="id" id="findByIdStyle">
             <div *ngIf="submitted && messageForm.controls.id.errors" class="error">
               <div *ngIf="messageForm.controls.id.errors.required">ID is required</div>
             </div>
           </label>
-        <button type="submit" class = "btn btn-primary">Search ID</button>
+        <button type="submit" class = "btn btn-info">Search ID</button>
     </form>
   
-    <div *ngIf="product != null && submitted && success" class="results">
+    <div *ngIf="product != null && submitted && success" class="results" id="getByIdBox">
       <strong>Product has been found.</strong>
         <div class="productFoundSpacing">
           <p class="list-group-item-text"><em>ID:  </em>{{ product.id }}</p>
@@ -115,7 +117,9 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                  <h1> ARE YOU SURE YOU WANT TO DELETE? </h1>
+                <div class= "deleteConfirmation">
+                  <h4> Are you sure you want to delete? </h4>
+                </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-danger" (click)="onCloseHandledDelete(id)">Delete</button>
                   <button type="button" class="btn btn-secondary" (click)="onCloseHandled()">Close</button>

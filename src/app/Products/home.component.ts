@@ -37,7 +37,6 @@ export class HomeComponent implements OnInit {
 
     this.data.getProducts().subscribe(data=> {
       this.products = data
-      console.log(data);
     })
   }
   
@@ -56,43 +55,35 @@ export class HomeComponent implements OnInit {
   
   
    onCloseHandledUpdate(id){
-     console.log(id + 'this is the product')
      this.displayUpdate='none'; 
-     console.log("HIT THE UPDATECLOSEHANDLED")
      if(this.messageFormUpdate.invalid) {
        return;
      }
      var product = this.messageFormUpdate.value;
-     console.log(product, id);
      this.data.updateProduct(product, id).subscribe(x => {
        console.log(x);
        this.data.getProducts().subscribe(data=> {
         this.products = data
-        console.log(data);
      })
     })
   }
     
     
     openModalDelete(id) {
-      console.log(id + "This is the id");
       this.id = id;
       this.displayDelete = "block";
     }
 
     
     onCloseHandledDelete(id){
-      console.log("id in close handled delete = " + id);
       var product = {
         id
       };
       this.displayDelete="none";
-      console.log("HIT THE DELETECLOSEHANDLED")
       this.data.deleteProduct(product).subscribe(x => {
         this.product = x;
         this.data.getProducts().subscribe(data=> {
           this.products = data
-          console.log(data);
         })
       });
     }
@@ -108,16 +99,4 @@ export class HomeComponent implements OnInit {
       this.product = x;
     })
   }
-
-  // onSubmitUpdate() {
-  //   this.submitted=true;
-  //   if(this.messageFormUpdate.invalid) {
-  //     return;
-  //   }
-  //   this.success = true;
-  //   var product = this.messageFormUpdate.value;
-  //   console.log(product.id + "Here is the product ID");
-  //   this.data.updateProduct(product);
-  //   console.log("hitting the onsubmitupdate")
-  // }
 }

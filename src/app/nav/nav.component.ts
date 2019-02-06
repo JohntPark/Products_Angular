@@ -29,8 +29,6 @@ export class NavComponent implements OnInit {
 
   toggleCollapse() {
     this.navbarOpen = !this.navbarOpen;
-
     this.showNav = !this.showNav;
-    console.log("hitting")
   }
 }

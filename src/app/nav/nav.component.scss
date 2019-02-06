@@ -63,7 +63,7 @@ ul ul a {
 }
 #sidebar {
     width: 20%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
@@ -71,6 +71,7 @@ ul ul a {
     z-index: 999;
     background: #7386D5;
     color: #fff;
+    overflow: hidden;
     transition: all 0.5s;
 }
 #sidebar ul li a {
